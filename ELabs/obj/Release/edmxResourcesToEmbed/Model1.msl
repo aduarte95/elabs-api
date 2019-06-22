@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="elabsModelStoreContainer" CdmEntityContainer="elabsDB">
+    <EntitySetMapping Name="edificio">
+      <EntityTypeMapping TypeName="elabsModel.edificio">
+        <MappingFragment StoreEntitySet="edificio">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipo">
+      <EntityTypeMapping TypeName="elabsModel.equipo">
+        <MappingFragment StoreEntitySet="equipo">
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="laboratorio_num_fk" ColumnName="laboratorio_num_fk" />
+          <ScalarProperty Name="laboratorio_edificio_fk" ColumnName="laboratorio_edificio_fk" />
+          <ScalarProperty Name="t_equipo_fk" ColumnName="t_equipo_fk" />
+          <ScalarProperty Name="e_equipo_fk" ColumnName="e_equipo_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="estado">
+      <EntityTypeMapping TypeName="elabsModel.estado">
+        <MappingFragment StoreEntitySet="estado">
+          <ScalarProperty Name="estado1" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="estado_equipo">
+      <EntityTypeMapping TypeName="elabsModel.estado_equipo">
+        <MappingFragment StoreEntitySet="estado_equipo">
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="laboratorio">
+      <EntityTypeMapping TypeName="elabsModel.laboratorio">
+        <MappingFragment StoreEntitySet="laboratorio">
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="edificio_fk" ColumnName="edificio_fk" />
+          <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+          <ScalarProperty Name="estado_fk" ColumnName="estado_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reserva">
+      <EntityTypeMapping TypeName="elabsModel.reserva">
+        <MappingFragment StoreEntitySet="reserva">
+          <ScalarProperty Name="identificador" ColumnName="identificador" />
+          <ScalarProperty Name="usuario_fk" ColumnName="usuario_fk" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="laboratorio_num_fk" ColumnName="laboratorio_num_fk" />
+          <ScalarProperty Name="laboratorio_edificio_fk" ColumnName="laboratorio_edificio_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_equipo">
+      <EntityTypeMapping TypeName="elabsModel.tipo_equipo">
+        <MappingFragment StoreEntitySet="tipo_equipo">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="elabsModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="esProfesor" ColumnName="esProfesor" />
+          <ScalarProperty Name="esAdmin" ColumnName="esAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

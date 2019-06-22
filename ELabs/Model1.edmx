@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="elabsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="edificio">
+          <Key>
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipo">
+          <Key>
+            <PropertyRef Name="serie" />
+          </Key>
+          <Property Name="serie" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="observaciones" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="laboratorio_num_fk" Type="int" Nullable="false" />
+          <Property Name="laboratorio_edificio_fk" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="t_equipo_fk" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="e_equipo_fk" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estado_equipo">
+          <Key>
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="laboratorio">
+          <Key>
+            <PropertyRef Name="numero" />
+            <PropertyRef Name="edificio_fk" />
+          </Key>
+          <Property Name="numero" Type="int" Nullable="false" />
+          <Property Name="edificio_fk" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="capacidad" Type="int" Nullable="false" />
+          <Property Name="estado_fk" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reserva">
+          <Key>
+            <PropertyRef Name="identificador" />
+            <PropertyRef Name="usuario_fk" />
+          </Key>
+          <Property Name="identificador" Type="int" Nullable="false" />
+          <Property Name="usuario_fk" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_inicio" Type="date" Nullable="false" />
+          <Property Name="fecha_fin" Type="date" Nullable="false" />
+          <Property Name="laboratorio_num_fk" Type="int" Nullable="false" />
+          <Property Name="laboratorio_edificio_fk" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_equipo">
+          <Key>
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="correo" />
+          </Key>
+          <Property Name="correo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="esProfesor" Type="tinyint" Nullable="false" />
+          <Property Name="esAdmin" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__equipo__5AEE82B9">
+          <End Role="laboratorio" Type="Self.laboratorio" Multiplicity="1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="laboratorio">
+              <PropertyRef Name="numero" />
+              <PropertyRef Name="edificio_fk" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="laboratorio_num_fk" />
+              <PropertyRef Name="laboratorio_edificio_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__equipo__e_equipo__5CD6CB2B">
+          <End Role="estado_equipo" Type="Self.estado_equipo" Multiplicity="1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado_equipo">
+              <PropertyRef Name="estado" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="e_equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__equipo__t_equipo__5BE2A6F2">
+          <End Role="tipo_equipo" Type="Self.tipo_equipo" Multiplicity="1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_equipo">
+              <PropertyRef Name="nombre" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="t_equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__laborator__edifi__534D60F1">
+          <End Role="edificio" Type="Self.edificio" Multiplicity="1" />
+          <End Role="laboratorio" Type="Self.laboratorio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edificio">
+              <PropertyRef Name="nombre" />
+            </Principal>
+            <Dependent Role="laboratorio">
+              <PropertyRef Name="edificio_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__laborator__estad__5441852A">
+          <End Role="estado" Type="Self.estado" Multiplicity="1" />
+          <End Role="laboratorio" Type="Self.laboratorio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="estado" />
+            </Principal>
+            <Dependent Role="laboratorio">
+              <PropertyRef Name="estado_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__5812160E">
+          <End Role="laboratorio" Type="Self.laboratorio" Multiplicity="1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="laboratorio">
+              <PropertyRef Name="numero" />
+              <PropertyRef Name="edificio_fk" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="laboratorio_num_fk" />
+              <PropertyRef Name="laboratorio_edificio_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__usuario__571DF1D5">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="correo" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="usuario_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="elabsModelStoreContainer">
+          <EntitySet Name="edificio" EntityType="Self.edificio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipo" EntityType="Self.equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estado" EntityType="Self.estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estado_equipo" EntityType="Self.estado_equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="laboratorio" EntityType="Self.laboratorio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reserva" EntityType="Self.reserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_equipo" EntityType="Self.tipo_equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__equipo__5AEE82B9" Association="Self.FK__equipo__5AEE82B9">
+            <End Role="laboratorio" EntitySet="laboratorio" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__equipo__e_equipo__5CD6CB2B" Association="Self.FK__equipo__e_equipo__5CD6CB2B">
+            <End Role="estado_equipo" EntitySet="estado_equipo" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__equipo__t_equipo__5BE2A6F2" Association="Self.FK__equipo__t_equipo__5BE2A6F2">
+            <End Role="tipo_equipo" EntitySet="tipo_equipo" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__laborator__edifi__534D60F1" Association="Self.FK__laborator__edifi__534D60F1">
+            <End Role="edificio" EntitySet="edificio" />
+            <End Role="laboratorio" EntitySet="laboratorio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__laborator__estad__5441852A" Association="Self.FK__laborator__estad__5441852A">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="laboratorio" EntitySet="laboratorio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__5812160E" Association="Self.FK__reserva__5812160E">
+            <End Role="laboratorio" EntitySet="laboratorio" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__usuario__571DF1D5" Association="Self.FK__reserva__usuario__571DF1D5">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="elabsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="edificio">
+          <Key>
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="laboratorio" Relationship="Self.FK__laborator__edifi__534D60F1" FromRole="edificio" ToRole="laboratorio" />
+        </EntityType>
+        <EntityType Name="equipo">
+          <Key>
+            <PropertyRef Name="serie" />
+          </Key>
+          <Property Name="serie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="observaciones" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="laboratorio_num_fk" Type="Int32" Nullable="false" />
+          <Property Name="laboratorio_edificio_fk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="t_equipo_fk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="e_equipo_fk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="laboratorio" Relationship="Self.FK__equipo__5AEE82B9" FromRole="equipo" ToRole="laboratorio" />
+          <NavigationProperty Name="estado_equipo" Relationship="Self.FK__equipo__e_equipo__5CD6CB2B" FromRole="equipo" ToRole="estado_equipo" />
+          <NavigationProperty Name="tipo_equipo" Relationship="Self.FK__equipo__t_equipo__5BE2A6F2" FromRole="equipo" ToRole="tipo_equipo" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="estado1" />
+          </Key>
+          <Property Name="estado1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="laboratorio" Relationship="Self.FK__laborator__estad__5441852A" FromRole="estado" ToRole="laboratorio" />
+        </EntityType>
+        <EntityType Name="estado_equipo">
+          <Key>
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="equipo" Relationship="Self.FK__equipo__e_equipo__5CD6CB2B" FromRole="estado_equipo" ToRole="equipo" />
+        </EntityType>
+        <EntityType Name="laboratorio">
+          <Key>
+            <PropertyRef Name="numero" />
+            <PropertyRef Name="edificio_fk" />
+          </Key>
+          <Property Name="numero" Type="Int32" Nullable="false" />
+          <Property Name="edificio_fk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="capacidad" Type="Int32" Nullable="false" />
+          <Property Name="estado_fk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="edificio" Relationship="Self.FK__laborator__edifi__534D60F1" FromRole="laboratorio" ToRole="edificio" />
+          <NavigationProperty Name="equipo" Relationship="Self.FK__equipo__5AEE82B9" FromRole="laboratorio" ToRole="equipo" />
+          <NavigationProperty Name="estado" Relationship="Self.FK__laborator__estad__5441852A" FromRole="laboratorio" ToRole="estado" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__reserva__5812160E" FromRole="laboratorio" ToRole="reserva" />
+        </EntityType>
+        <EntityType Name="reserva">
+          <Key>
+            <PropertyRef Name="identificador" />
+            <PropertyRef Name="usuario_fk" />
+          </Key>
+          <Property Name="identificador" Type="Int32" Nullable="false" />
+          <Property Name="usuario_fk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="laboratorio_num_fk" Type="Int32" Nullable="false" />
+          <Property Name="laboratorio_edificio_fk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="laboratorio" Relationship="Self.FK__reserva__5812160E" FromRole="reserva" ToRole="laboratorio" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__reserva__usuario__571DF1D5" FromRole="reserva" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="tipo_equipo">
+          <Key>
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="equipo" Relationship="Self.FK__equipo__t_equipo__5BE2A6F2" FromRole="tipo_equipo" ToRole="equipo" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="correo" />
+          </Key>
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="esProfesor" Type="Byte" Nullable="false" />
+          <Property Name="esAdmin" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__reserva__usuario__571DF1D5" FromRole="usuario" ToRole="reserva" />
+        </EntityType>
+        <Association Name="FK__laborator__edifi__534D60F1">
+          <End Role="edificio" Type="Self.edificio" Multiplicity="1" />
+          <End Role="laboratorio" Type="Self.laboratorio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edificio">
+              <PropertyRef Name="nombre" />
+            </Principal>
+            <Dependent Role="laboratorio">
+              <PropertyRef Name="edificio_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__equipo__5AEE82B9">
+          <End Role="laboratorio" Type="Self.laboratorio" Multiplicity="1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="laboratorio">
+              <PropertyRef Name="numero" />
+              <PropertyRef Name="edificio_fk" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="laboratorio_num_fk" />
+              <PropertyRef Name="laboratorio_edificio_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__equipo__e_equipo__5CD6CB2B">
+          <End Role="estado_equipo" Type="Self.estado_equipo" Multiplicity="1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado_equipo">
+              <PropertyRef Name="estado" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="e_equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__equipo__t_equipo__5BE2A6F2">
+          <End Role="tipo_equipo" Type="Self.tipo_equipo" Multiplicity="1" />
+          <End Role="equipo" Type="Self.equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_equipo">
+              <PropertyRef Name="nombre" />
+            </Principal>
+            <Dependent Role="equipo">
+              <PropertyRef Name="t_equipo_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__laborator__estad__5441852A">
+          <End Role="estado" Type="Self.estado" Multiplicity="1" />
+          <End Role="laboratorio" Type="Self.laboratorio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="estado1" />
+            </Principal>
+            <Dependent Role="laboratorio">
+              <PropertyRef Name="estado_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__5812160E">
+          <End Role="laboratorio" Type="Self.laboratorio" Multiplicity="1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="laboratorio">
+              <PropertyRef Name="numero" />
+              <PropertyRef Name="edificio_fk" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="laboratorio_num_fk" />
+              <PropertyRef Name="laboratorio_edificio_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__usuario__571DF1D5">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="correo" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="usuario_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="elabsDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="edificio" EntityType="Self.edificio" />
+          <EntitySet Name="equipo" EntityType="Self.equipo" />
+          <EntitySet Name="estado" EntityType="Self.estado" />
+          <EntitySet Name="estado_equipo" EntityType="Self.estado_equipo" />
+          <EntitySet Name="laboratorio" EntityType="Self.laboratorio" />
+          <EntitySet Name="reserva" EntityType="Self.reserva" />
+          <EntitySet Name="tipo_equipo" EntityType="Self.tipo_equipo" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="FK__laborator__edifi__534D60F1" Association="Self.FK__laborator__edifi__534D60F1">
+            <End Role="edificio" EntitySet="edificio" />
+            <End Role="laboratorio" EntitySet="laboratorio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__equipo__5AEE82B9" Association="Self.FK__equipo__5AEE82B9">
+            <End Role="laboratorio" EntitySet="laboratorio" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__equipo__e_equipo__5CD6CB2B" Association="Self.FK__equipo__e_equipo__5CD6CB2B">
+            <End Role="estado_equipo" EntitySet="estado_equipo" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__equipo__t_equipo__5BE2A6F2" Association="Self.FK__equipo__t_equipo__5BE2A6F2">
+            <End Role="tipo_equipo" EntitySet="tipo_equipo" />
+            <End Role="equipo" EntitySet="equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__laborator__estad__5441852A" Association="Self.FK__laborator__estad__5441852A">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="laboratorio" EntitySet="laboratorio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__5812160E" Association="Self.FK__reserva__5812160E">
+            <End Role="laboratorio" EntitySet="laboratorio" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__usuario__571DF1D5" Association="Self.FK__reserva__usuario__571DF1D5">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="elabsModelStoreContainer" CdmEntityContainer="elabsDB">
+          <EntitySetMapping Name="edificio">
+            <EntityTypeMapping TypeName="elabsModel.edificio">
+              <MappingFragment StoreEntitySet="edificio">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipo">
+            <EntityTypeMapping TypeName="elabsModel.equipo">
+              <MappingFragment StoreEntitySet="equipo">
+                <ScalarProperty Name="serie" ColumnName="serie" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="laboratorio_num_fk" ColumnName="laboratorio_num_fk" />
+                <ScalarProperty Name="laboratorio_edificio_fk" ColumnName="laboratorio_edificio_fk" />
+                <ScalarProperty Name="t_equipo_fk" ColumnName="t_equipo_fk" />
+                <ScalarProperty Name="e_equipo_fk" ColumnName="e_equipo_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estado">
+            <EntityTypeMapping TypeName="elabsModel.estado">
+              <MappingFragment StoreEntitySet="estado">
+                <ScalarProperty Name="estado1" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estado_equipo">
+            <EntityTypeMapping TypeName="elabsModel.estado_equipo">
+              <MappingFragment StoreEntitySet="estado_equipo">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="laboratorio">
+            <EntityTypeMapping TypeName="elabsModel.laboratorio">
+              <MappingFragment StoreEntitySet="laboratorio">
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="edificio_fk" ColumnName="edificio_fk" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+                <ScalarProperty Name="estado_fk" ColumnName="estado_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reserva">
+            <EntityTypeMapping TypeName="elabsModel.reserva">
+              <MappingFragment StoreEntitySet="reserva">
+                <ScalarProperty Name="identificador" ColumnName="identificador" />
+                <ScalarProperty Name="usuario_fk" ColumnName="usuario_fk" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="laboratorio_num_fk" ColumnName="laboratorio_num_fk" />
+                <ScalarProperty Name="laboratorio_edificio_fk" ColumnName="laboratorio_edificio_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_equipo">
+            <EntityTypeMapping TypeName="elabsModel.tipo_equipo">
+              <MappingFragment StoreEntitySet="tipo_equipo">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="elabsModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="esProfesor" ColumnName="esProfesor" />
+                <ScalarProperty Name="esAdmin" ColumnName="esAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
