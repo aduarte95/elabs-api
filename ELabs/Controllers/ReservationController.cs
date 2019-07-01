@@ -23,11 +23,11 @@ namespace ELabs.Controllers
             try
             {
                 String html = "";
-                foreach (reserva reserva in reservation.GetReservas())
+                foreach (reserva reserva in )
                 {
                     html += reserva.fecha_fin + "\n";
                 }
-                return Request.CreateResponse(HttpStatusCode.OK, html);
+                return Request.CreateResponse(HttpStatusCode.OK, reservation.GetReservas());
             }
             catch (Exception e)
             {
