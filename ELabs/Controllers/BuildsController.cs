@@ -4,25 +4,27 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace ELabs.Controllers
 {
-    public class ReservationController : ApiController
+    public class BuildsController : ApiController
     {
-        private Models.Reservation reservation;
+        private Models.Builds builds;
 
-        public ReservationController()
+        public BuildsController()
         {
-            this.reservation = new Models.Reservation();
+            this.builds = new Models.Builds();
         }
         // GET api/<controller>
-        [Route("reservas")]
+        [Route("builds")]
         [HttpGet]
         public HttpResponseMessage Get()
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, reservation.GetReservas());
+                List<edificio> buildsList = builds.GetBuilds();
+                return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(buildsList));
             }
             catch (Exception e)
             {
@@ -30,23 +32,23 @@ namespace ELabs.Controllers
             }
         }
 
-        // GET: api/Reservation/5
+        // GET: api/Builds/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Reservation
+        // POST: api/Builds
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/Reservation/5
+        // PUT: api/Builds/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Reservation/5
+        // DELETE: api/Builds/5
         public void Delete(int id)
         {
         }
