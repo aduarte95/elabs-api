@@ -13,7 +13,7 @@ namespace ELabs.Models
             {
                 using (elabsDB db = new elabsDB())
                 {
-                    return db.reserva.ToList();
+                    return db.reserva.Include("reserva.laboratorio.numero").ToList();
                 }
             }
             catch (Exception e)
