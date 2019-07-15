@@ -46,10 +46,11 @@
     </Key>
     <Property Name="identificador" Type="int" Nullable="false" />
     <Property Name="usuario_fk" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="fecha_inicio" Type="date" Nullable="false" />
-    <Property Name="fecha_fin" Type="date" Nullable="false" />
+    <Property Name="fecha_inicio" Type="datetime" Nullable="false" />
+    <Property Name="fecha_fin" Type="datetime" Nullable="false" />
     <Property Name="laboratorio_num_fk" Type="int" Nullable="false" />
     <Property Name="laboratorio_edificio_fk" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="bit" />
   </EntityType>
   <EntityType Name="tipo_equipo">
     <Key>
@@ -129,7 +130,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__reserva__5812160E">
+  <Association Name="FK__reserva__7C4F7684">
     <End Role="laboratorio" Type="Self.laboratorio" Multiplicity="1" />
     <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
     <ReferentialConstraint>
@@ -143,7 +144,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__reserva__usuario__571DF1D5">
+  <Association Name="FK__reserva__usuario__7B5B524B">
     <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
     <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
     <ReferentialConstraint>
@@ -184,11 +185,11 @@
       <End Role="estado" EntitySet="estado" />
       <End Role="laboratorio" EntitySet="laboratorio" />
     </AssociationSet>
-    <AssociationSet Name="FK__reserva__5812160E" Association="Self.FK__reserva__5812160E">
+    <AssociationSet Name="FK__reserva__7C4F7684" Association="Self.FK__reserva__7C4F7684">
       <End Role="laboratorio" EntitySet="laboratorio" />
       <End Role="reserva" EntitySet="reserva" />
     </AssociationSet>
-    <AssociationSet Name="FK__reserva__usuario__571DF1D5" Association="Self.FK__reserva__usuario__571DF1D5">
+    <AssociationSet Name="FK__reserva__usuario__7B5B524B" Association="Self.FK__reserva__usuario__7B5B524B">
       <End Role="usuario" EntitySet="usuario" />
       <End Role="reserva" EntitySet="reserva" />
     </AssociationSet>

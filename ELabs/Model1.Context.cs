@@ -18,8 +18,6 @@ namespace ELabs
         public elabsDB()
             : base("name=elabsDB")
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

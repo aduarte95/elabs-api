@@ -30,25 +30,19 @@ namespace ELabs.Controllers
             }
         }
 
-        // GET: api/Reservation/5
-        public string Get(int id)
+        [Route("reservas/{year}/{month}/{day}/{hour}")]
+        [HttpGet]
+        public HttpResponseMessage GetReservationsByDate(int year,int month, int day, int hour)
         {
-            return "value";
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, reservation.GetReservasByHour(hour,day,month,year));
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(e.Message);
+            }
         }
 
-        // POST: api/Reservation
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Reservation/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Reservation/5
-        public void Delete(int id)
-        {
-        }
     }
 }

@@ -9,6 +9,7 @@
 
 namespace ELabs
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -20,8 +21,14 @@ namespace ELabs
         public System.DateTime fecha_fin { get; set; }
         public int laboratorio_num_fk { get; set; }
         public string laboratorio_edificio_fk { get; set; }
-    
+        public Nullable<bool> estado { get; set; }
+
+        [JsonIgnore]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual laboratorio laboratorio { get; set; }
+
+        [JsonIgnore]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual usuario usuario { get; set; }
     }
 }

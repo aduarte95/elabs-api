@@ -5,21 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="85c72f09db1d48279b7a9c4eadabf99b" Name="Diagram1">
-        <EntityTypeShape EntityType="elabsModel.edificio" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="elabsModel.equipo" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="elabsModel.estado" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="elabsModel.estado_equipo" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="elabsModel.laboratorio" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="elabsModel.reserva" Width="3.875" PointX="8.625" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="elabsModel.tipo_equipo" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="elabsModel.usuario" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="elabsModel.FK__laborator__edifi__534D60F1" ManuallyRouted="false" />
-        <AssociationConnector Association="elabsModel.FK__equipo__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="elabsModel.FK__equipo__e_equipo__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="elabsModel.FK__equipo__t_equipo__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="elabsModel.FK__laborator__estad__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="elabsModel.FK__reserva__5812160E" ManuallyRouted="false" />
-        <AssociationConnector Association="elabsModel.FK__reserva__usuario__571DF1D5" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="elabsModel.edificio" Width="1.5" PointX="0.75" PointY="5.125" />
+        <EntityTypeShape EntityType="elabsModel.equipo" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="elabsModel.estado" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="elabsModel.estado_equipo" Width="1.5" PointX="3" PointY="2" />
+        <EntityTypeShape EntityType="elabsModel.laboratorio" Width="1.5" PointX="3" PointY="4.5" />
+        <EntityTypeShape EntityType="elabsModel.reserva" Width="1.5" PointX="8.25" PointY="4.5" />
+        <EntityTypeShape EntityType="elabsModel.tipo_equipo" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="elabsModel.usuario" Width="1.5" PointX="6" PointY="0.75" />
+        <AssociationConnector Association="elabsModel.FK__laborator__edifi__534D60F1" />
+        <AssociationConnector Association="elabsModel.FK__equipo__5AEE82B9" />
+        <AssociationConnector Association="elabsModel.FK__equipo__e_equipo__5CD6CB2B" />
+        <AssociationConnector Association="elabsModel.FK__equipo__t_equipo__5BE2A6F2" />
+        <AssociationConnector Association="elabsModel.FK__laborator__estad__5441852A" />
+        <AssociationConnector Association="elabsModel.FK__reserva__7C4F7684" />
+        <AssociationConnector Association="elabsModel.FK__reserva__usuario__7B5B524B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

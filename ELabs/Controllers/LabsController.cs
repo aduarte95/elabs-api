@@ -30,5 +30,20 @@ namespace ELabs.Controllers
                 throw new ArgumentException(e.Message);
             }
         }
+
+        [Route("labs/{build}")]
+        [HttpGet]
+        public HttpResponseMessage GetLabsByBuild(string build)
+        {
+            try
+            {
+                List<laboratorio> labsList = lab.GetLaboratoriosByBuild(build);
+                return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(labsList));
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(e.Message);
+            }
+        }
     }
 }
